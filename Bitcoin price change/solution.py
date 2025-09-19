@@ -114,13 +114,13 @@ class OHLCAnalyzer:
     def convert_unix_to_datetime(self, unix_time: int) -> str:
         return datetime.fromtimestamp(unix_time / 1000).strftime('%Y-%m-%d %H:%M:%S')
 
-    def show_n_first(self, n: int = 5) -> None:
+    def show_first_n(self, n: int = 5, percent_diff: float = 3.0, time_interval: int = 60 * 60 * 1000) -> None:
 
         header = self.ohlc_reader.get_header()
         close_time_index = header.index(self.close_time_name)
         close_price_index = header.index(self.close_price_name)
 
-        for i, (price_change_percent, ohlc_pair) in enumerate(self.analyze_close_change(percent_diff=3.0, time_interval=60 * 60 * 1000)):
+        for i, (price_change_percent, ohlc_pair) in enumerate(self.analyze_close_change(percent_diff=percent_diff, time_interval=time_interval)):
             
             if i >= n:
                 break
@@ -139,5 +139,4 @@ if __name__ == "__main__":
     ohlc_analyzer.set_close_time_name("close_time")
     ohlc_analyzer.set_close_price_name("close")
 
-
-    ohlc_analyzer.show_n_first()
+    ohlc_analyzer.show_first_n(n=20, percent_diff=5)
