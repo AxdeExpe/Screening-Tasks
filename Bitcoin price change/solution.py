@@ -3,7 +3,6 @@ import re
 import pandas as pd
 from datetime import datetime
 from typing import Iterator, Tuple
-import math 
 
 class OHLCDataReader:
     def __init__(self, path: str = "btc-1h.csv"):
@@ -139,5 +138,6 @@ if __name__ == "__main__":
     ohlc_analyzer = OHLCAnalyzer(ohlc_data_reader)
     ohlc_analyzer.set_close_time_name("close_time")
     ohlc_analyzer.set_close_price_name("close")
+
 
     ohlc_analyzer.show_n_first()
