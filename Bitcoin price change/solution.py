@@ -111,7 +111,7 @@ class OHLCAnalyzer:
                 ohlc_pair[0] = ohlc_pair[1]
                 ohlc_pair[1] = None
 
-    def convert_unix_to_datetime(self, unix_time: int) -> str:
+    def _convert_unix_to_datetime(self, unix_time: int) -> str:
         return datetime.fromtimestamp(unix_time / 1000).strftime('%Y-%m-%d %H:%M:%S')
 
     def show_first_n(self, n: int = 5, percent_diff: float = 3.0, time_interval: int = 60 * 60 * 1000) -> None:
@@ -125,8 +125,8 @@ class OHLCAnalyzer:
             if i >= n:
                 break
 
-            close_time_start = self.convert_unix_to_datetime(int(ohlc_pair[0][close_time_index]))
-            close_time_end = self.convert_unix_to_datetime(int(ohlc_pair[1][close_time_index]))
+            close_time_start = self._convert_unix_to_datetime(int(ohlc_pair[0][close_time_index]))
+            close_time_end = self._convert_unix_to_datetime(int(ohlc_pair[1][close_time_index]))
             print("{:<10.2f}% {:<10} {:<10} {:<10} {:<10}".format(price_change_percent, close_time_start, ohlc_pair[0][close_price_index], close_time_end, ohlc_pair[1][close_price_index]))
 
 
